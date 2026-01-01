@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>界 (Boundary)</title>
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Import Map for Modules -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+                "gsap": "https://esm.sh/gsap@3.12.5"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="game-container"></div>
+    <div id="debug-layer"
+        style="position:fixed; top:0; left:0; width:100%; z-index:9999; pointer-events:none; color:red; font-size:20px; font-weight:bold; text-shadow: 1px 1px 0 #000;">
+    </div>
+    <script>
+        // Global error handler
+        window.onerror = function (msg, url, line) {
+            const div = document.getElementById('debug-layer');
+            if (div) div.innerHTML += `<div style="background:rgba(0,0,0,0.8); padding:5px;">ERR: ${msg}</div>`;
+        };
+    </script>
+
+    <!-- UI Layers -->
+
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen active">
+        <h1 class="title">界</h1>
+        <p class="start-hint">點擊畫面進入遊戲</p>
+    </div>
+
+    <!-- Intro Overlay (Black screen subtitles) -->
+    <div id="intro-overlay" class="screen hidden">
+        <div id="subtitle-container"></div>
+    </div>
+
+    <!-- HUD (Inventory) -->
+    <div id="hud" class="hidden">
+        <div id="item-description-panel" class="hidden">
+            <h3 id="item-title"></h3>
+            <p id="item-desc"></p>
+        </div>
+
+        <div id="inventory-bar">
+            <!-- Inventory Slots will be injected here -->
+            <div class="inv-slot" data-index="0"></div>
+            <div class="inv-slot" data-index="1"></div>
+            <div class="inv-slot" data-index="2"></div>
+            <div class="inv-slot" data-index="3"></div>
+            <div class="inv-slot" data-index="4"></div>
+        </div>
+    </div>
+
+    <!-- Popups / Dialogs -->
+    <div id="popup-overlay" class="hidden">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+            <div id="popup-buttons">
+                <!-- Dynamic buttons -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Module Entry Point -->
+    <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>
